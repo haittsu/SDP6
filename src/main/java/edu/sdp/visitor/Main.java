@@ -12,6 +12,11 @@ public final class Main {
         System.out.printf("Files ending in %s with size >= %d bytes:%n", suffix, minimumSize);
         new SearchVisitor(name -> name.endsWith(suffix), minimumSize).run(workspace)
                 .forEach(System.out::println);
+
+        StatisticsVisitor.Result stats = new StatisticsVisitor().run(workspace);
+        System.out.println("Files: " + stats.fileCount());
+        System.out.println("Directories: " + stats.directoryCount());
+        System.out.println("Maximum depth: " + stats.maxDepth());
     }
 
     private static DirectoryNode exampleTree() {
